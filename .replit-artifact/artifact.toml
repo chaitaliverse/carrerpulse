@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Data Career Intelligence Platform"
+version = "1.0.0"
+id = "artifacts/data-career-platform"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22525
+
+[services.development]
+run = "pnpm --filter @workspace/data-career-platform run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/data-career-platform", "run", "build" ]
+publicDir = "artifacts/data-career-platform/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22525"
+BASE_PATH = "/"
